@@ -64,7 +64,7 @@ public class InitiateRenewalFlow {
 	
 	   @Bean
 	    public IntegrationFlow errorResponse() {
-	        return IntegrationFlows.from(errorChannel()).log("ERROR FLOW TRIGGERED")
+	        return IntegrationFlows.from(renewalErrorChannel()).log("ERROR FLOW TRIGGERED")
 	                   /* .<MessagingException, Message<?>>transform(MessagingException::getFailedMessage,
 	                            e -> e.poller(p -> p.fixedDelay(100)))*/
 	                    .get();
@@ -78,7 +78,7 @@ public class InitiateRenewalFlow {
 	    }
 
 	    @Bean
-	    public PollableChannel errorChannel() {
+	    public PollableChannel renewalErrorChannel() {
 	        return new QueueChannel();
 	    }
 	
